@@ -1,0 +1,13 @@
+{
+  "name": "Pear Up Ticket Exporter",
+  "author": {
+    "name": "Ildus Sadykov",
+    "email": "ildus.sadykov@flatstack.com",
+    "url": "https://github.com/IldusSadykov"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location":  ["ticket_sidebar"],
+  "version": "1.0",
+  "frameworkVersion": "1.0"
+}

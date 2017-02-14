@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <h1>{{t "fields_title"}}</h1>
+  <div class="message">{{t "fields_button_group"}}</div>
+  <div class="btn-group-wrap">
+    <div class="btn-group">
+      <button class="btn active" id="ticket">{{t "ticket"}}</button>
+      <button class="btn" id="channel">{{t "channel"}}</button>
+      <button class="btn" id="requester">{{t "requester"}}</button>
+      <button class="btn" id="submitter">{{t "submitter"}}</button>
+      <button class="btn" id="assignee">{{t "assignee"}}</button>
+      <button class="btn" id="group">{{t "group_org_brand"}}</button>
+      <button class="btn" id="custom">{{t "custom_fields"}}</button>
+    </div>
+  </div>
+
+  <div id="exclude" class="ticket">
+    <label>{{t "fields_not_included"}}</label>
+    <ul id="available_columns" class="sortablelist">
+    {{#each fields}}
+      {{#unless selected}}
+      <li id="{{id}}" class="sortable {{css}}" >{{name}}</li>
+      {{/unless}}
+    {{/each}}
+    </ul>
+  </div>
+  <div id="include">
+    <label>{{t "fields_included"}}</label>
+    <ul id="selected_columns" class="sortablelist">
+    {{#each fields}}
+      {{#if selected}}
+      <li id="{{id}}" class="sortable {{css}}" >{{name}}</li>
+      {{/if}}
+    {{/each}}
+    </ul>
+  </div>
+
+  <div class="clearfix"></div>
+  <button type="button" class="btn" id="fields_back">{{t "fields_back_button"}}</button>
+  <button type="button" class="btn btn-primary" id="fields_continue">{{t "fields_continue_button"}}</button>
+</div>
