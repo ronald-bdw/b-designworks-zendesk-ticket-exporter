@@ -35,17 +35,4 @@
 
   <button type="button" class="btn" id="settings_back">{{t "settings_back_button"}}</button>
   <button type="button" class="btn btn-info" id="settings_continue">{{t "settings_continue_button"}}</button>
-  </div>","view":"<div class="wrapper">
-  <h1>{{t "view_title"}}</h1>
-  <label>{{t "view_select" }}</label>
-
-  <select class="view_id" data-zd-type="combo_select_menu">
-    <option value="">\u0026nbsp;</option>
-    {{#each views}}
-      <option value="{{id}}" {{selected}}>{{title}}</option>
-    {{/each}}
-  </select>
-
-  <div id="message"></div>
-  <button type="button" class="btn btn-primary" id="view_continue" disabled>{{t "view_continue_button"}}</button>
 </div>

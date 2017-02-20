@@ -10,6 +10,7 @@
       <button class="btn" id="assignee">{{t "assignee"}}</button>
       <button class="btn" id="group">{{t "group_org_brand"}}</button>
       <button class="btn" id="custom">{{t "custom_fields"}}</button>
+      <button class="btn" id="user_custom">{{t "user_fields"}}</button>
     </div>
   </div>
 

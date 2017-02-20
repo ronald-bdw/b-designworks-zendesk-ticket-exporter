@@ -1,8 +1,205 @@
 {
   "app": {
-    "description": "Play the famous zen tunes in your help desk.",
-    "name": "Buddha Machine"
+      "description": "Export your tickets to CSV in 3 easy steps!",
+      "name": "Ticket Exporter"
   },
+  "loading_title": "Please wait a moment while we're getting ready!",
+  "random": {
+      "1": "Walking the dog...",
+      "2": "Getting a cup of coffee...",
+      "3": "Brushing teeth...",
+      "4": "Acting busy...",
+      "5": "Complaining about the weather...",
+      "6": "Fixing bugs...",
+      "7": "Making a sandwich...",
+      "8": "Meditating...",
+      "9": "Creating silly loading messages..."
+  },
+  "view_title": "First, let's select the view you wish to export.",
+  "view_select": "View",
+  "view_error": "Oops! We couldn't find any views...",
+  "view_count": "Selecting this view will export {{count}} tickets. Click the continue button to select the output fields.",
+  "view_count_zero": "This view doesn't contain any tickets or none that you have access to. Please select another view.",
+  "view_continue_button": "Continue",
+  "ticket": "Ticket",
+  "channel": "Channel",
+  "requester": "Requester",
+  "submitter": "Submitter",
+  "assignee": "Assignee",
+  "group_org_brand": "Group, Organization \u0026 Brand",
+  "custom_fields": "Custom Fields",
+  "user_fields": "User Fields",
+  "fields": {
+    "id": "Ticket ID",
+    "external_id": "External ID",
+    "type": "Type",
+    "subject": "Subject",
+    "raw_subject": "Subject (Raw)",
+    "description": "Description",
+    "priority": "Priority",
+    "status": "Status",
+    "recipient": "Recipient",
+    "forum_topic_id": "Forum topic ID",
+    "problem_id": "Problem ID",
+    "has_incidents": "Has incidentens?",
+    "due_at": "Due at",
+    "tags": "Tags",
+    "comment_count": "Comment count",
+    "created_at": "Created at",
+    "updated_at": "Updated at",
+    "assignee_updated_at": "Assignee updated at",
+    "requester_updated_at": "Requester updated at",
+    "status_updated_at": "Status updated at",
+    "initially_assigned_at": "Initially assigned at",
+    "assigned_at": "Assigned at",
+    "solved_at": "Solved at",
+    "latest_comment_added_at": "Latest comment added at",
+    "satisfaction_rating": {
+      "score": "Satisfaction rating",
+      "comment": "Rating comment"
+    },
+    "via": {
+      "channel": "Channel",
+      "email": {
+        "from": {
+          "address": "Email address (from)",
+          "name": "Email display name (from)"
+        },
+        "to": {
+          "address": "Email address (to)",
+          "name": "Email display name (to)"
+        }
+      },
+      "twitter": {
+        "from": {
+          "name": "Twitter name (from)",
+          "username": "Twitter username (from)",
+          "profile_url": "Twitter profile URL (from)"
+        },
+        "to": {
+          "name": "Twitter name (to)",
+          "username": "Twitter username (to)",
+          "profile_url": "Twitter profile URL (to)"
+        }
+      },
+      "voice": {
+        "from": {
+          "phone": "Phone number (from)",
+          "formatted_phone": "Formatted phone number (from)",
+          "name": "Phone number name (from)"
+        },
+        "to": {
+          "phone": "Phone number (to)",
+          "formatted_phone": "Formatted phone number (to)",
+          "name": "Phone number name (to)"
+        }
+      },
+      "facebook": {
+        "from": {
+          "name": "Facebook name (from)",
+          "facebook_id": "Facebook ID (from)",
+          "profile_url": "Facebook profile URL (from)"
+        },
+        "to": {
+          "name": "Facebook name (to)",
+          "facebook_id": "Facebook ID (to)",
+          "profile_url": "Facebook profile URL (to)"
+        }
+      }
+    },
+    "user": {
+      "requester": "Requester",
+      "submitter": "Submitter",
+      "assignee": "Assignee",
+      "id": "{{user}} ID",
+      "external_id": "{{user}} external ID",
+      "name": "{{user}} name",
+      "alias": "{{user}} alias",
+      "email": "{{user}} email address",
+      "phone": "{{user}} phone number",
+      "locale": "{{user}} locale",
+      "time_zone": "{{user}} time zone",
+      "role": "{{user}} role",
+      "details": "{{user}} details",
+      "notes": "{{user}} notes",
+      "tags": "{{user}} tags",
+      "active": "{{user}} active?",
+      "veri fied": "{{user}} verified?",
+      "suspended": "{{user}} suspended?",
+      "created_at": "{{user}} created at",
+      "updated_at": "{{user}} updated at",
+      "last_login_at": "{{user}} last login at"
+    },
+    "group": {
+      "id": "Group ID",
+      "name": "Group name",
+      "created_at": "Group created at",
+      "updated_at": "Group updated at"
+    },
+    "organization": {
+      "id": "Organization ID",
+      "external_id": "Organization external ID",
+      "name": "Organization name",
+      "details":"Organization details",
+      "notes":"Organization notes",
+      "tags":"Organization tags",
+      "domain_names":"Organization domain names",
+      "created_at":"Organization created at",
+      "updated_at":"Organization updated at"
+    },
+    "brand": {
+      "id":"Brand ID",
+      "name":"Brand name",
+      "url":"Brand URL",
+      "active":"Brand active?",
+      "default":"Default brand?",
+      "created_at":"Brand created at",
+      "updated_at":"Brand updated at"
+    }
+  },
+  "fields_title":"Next, the fields you'd like to include.",
+  "fields_button_group":"You can cycle through the fields by clicking the buttons below. Drag and drop fields to include them in the export.",
+  "fields_included":"Included",
+  "fields_not_included":"Not included",
+  "fields_back_button":"Back",
+  "fields_continue_button":"Continue",
+  "settings_title":"Almost there... just some final settings!",
+  "filename":"Filename",
+  "field_delimiter":"Field delimiter",
+  "fd": {
+    "semicolon":"Semicolon",
+    "comma":"Comma",
+    "hash":"Pound/Hash",
+    "pipe":"Pipe"
+  },
+  "text_delimiter":"Text delimiter",
+  "td": {
+    "quotes":"Double quotes",
+    "quote":"Single quotes"
+  },
+  "date_format":"Date format",
+  "df": {
+    "csv":"CSV",
+    "local":"Localized",
+    "dmy":"DMY",
+    "usa":"United States",
+    "iso":"ISO8601",
+    "unix":"Unix timestamp"
+  },
+  "remove_line_breaks":"Remove line breaks",
+  "yes":"Yes",
+  "no":"No",
+  "remove_line_breaks_help":"This allows you to remove line breaks from multiline fields.",
+  "settings_back_button":"Back",
+  "settings_continue_button":"Export",
+  "download_title":"Let the magic happen!",
+  "export_wait":"Please wait while we prepare your download...",
+  "export_message":"We've exported {{count}} tickets for you.",
+  "export_success":" That's the exact number we've been expecting!",
+  "export_warning":" That's a difference of {{difference}} tickets. This can happen when exporting an active view.",
+  "export_error":" Be cautious, as we were expecting {{expected}} tickets.",
+  "download_back_button":"Back",
+  "download_button":"Download",
   "loading": "Welcome to this Sample App",
   "fetch": {
     "done": "Good",

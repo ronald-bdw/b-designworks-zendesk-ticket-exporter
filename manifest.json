@@ -1,13 +1,28 @@
 {
   "name": "Pear Up Ticket Exporter",
   "author": {
-    "name": "Ildus Sadykov",
-    "email": "ildus.sadykov@flatstack.com",
-    "url": "https://github.com/IldusSadykov"
+    "name": "Ronald Soh",
+    "email": "ronald@b-designworks.com",
+    "url": "https://github.com/"
   },
   "defaultLocale": "en",
   "private": true,
-  "location":  ["ticket_sidebar"],
+  "location":  ["nav_bar"],
   "version": "1.0",
-  "frameworkVersion": "1.0"
+  "frameworkVersion": "1.0",
+  "domainWhitelist": ["b-designworks.herokuapp.com", "pairup-api.herokuapp.com", "api.pairup.im"],
+  "parameters": [
+    {
+      "name": "pear_up_api_token",
+      "required": true,
+      "type": "text",
+      "secure": true
+    },
+    {
+      "name": "host",
+      "default": "https://b-designworks.herokuapp.com/v1",
+      "required": true,
+      "type": "url"
+    }
+  ]
 }

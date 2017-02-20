@@ -1,0 +1,146 @@
+header .logo {
+  background-image: url("https://89495.apps.zdusercontent.com/89495/assets/1471910783-5406501fe63d9708fefff8689a38215c/logo-small.png");
+}
+h1 {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 300;
+}
+select, .zd-combo-selectmenu {
+  margin-bottom: 12px;
+}
+footer {
+  position: fixed !important;
+  border-top: 1px solid #ebebeb !important;
+  background-color: #fbfbfb !important;
+  padding: 5px 10px !important;
+}
+.input-append {
+  margin-bottom: 12px;
+}
+.help-block {
+  margin-top: -10px;
+}
+.message {
+  margin-bottom: 4px;
+}
+.spinner {
+  width: 32px;
+  margin: 0;
+}
+.wrapper {
+  max-width: 800px;
+}
+label {
+  cursor: text;
+  /* font-weight: bold; */
+  font-size: 12px;
+  color: #999;
+  float: none;
+  margin: 4px 0 6px 0;
+}
+.spacer {
+  height: 32px;
+}
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn-success:hover {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #419641;
+  box-shadow: none;
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+.btn-info:hover {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #2aabd2;
+  box-shadow: none;
+}
+.btn-primary, .btn-success, .btn-info {
+  float: right;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.clearfix {
+  clear: both;
+}
+#exclude,
+#include {
+  float: left;
+  margin-right: 10px;
+}
+#exclude > ul,
+#include > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  min-height: 200px;
+  min-width: 200px;
+}
+li.sortable {
+  margin: 4px 0;
+  padding: 2px 4px;
+  border: 1px dashed #d3d3d3;
+  cursor: move;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#include li.sortable {
+  border: 1px dashed #94c000;
+}
+.sortable-placeholder {
+  margin: 4px 0;
+  padding: 0 4px;
+  border: 1px dashed #2daee0;
+  height: 18px;
+}
+div#exclude ul li.sortable {
+  display: none;
+}
+div#exclude.ticket ul li.ticket {
+  display: list-item;
+}
+div#exclude.channel ul li.channel {
+  display: list-item;
+}
+div#exclude.requester ul li.requester {
+  display: list-item;
+}
+div#exclude.submitter ul li.submitter {
+  display: list-item;
+}
+div#exclude.assignee ul li.assignee {
+  display: list-item;
+}
+div#exclude.group ul li.group {
+  display: list-item;
+}
+div#exclude.organization ul li.organization {
+  display: list-item;
+}
+div#exclude.custom ul li.custom {
+  display: list-item;
+}
+div#exclude.user-custom ul li.user-custom {
+  display: list-item;
+}
+.input-append .add-on {
+  padding: 5px 10px;
+}

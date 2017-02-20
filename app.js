@@ -176,6 +176,14 @@
         };
       },
 
+      getUserFields: function (url) {
+        return {
+          url:         url || '/api/v2/user_fields.json',
+          type:        'GET',
+          cache:       false
+        };
+      },
+
       getViewCount: function(id) {
         return {
           url:         '/api/v2/views/'+id+'/count.json',
@@ -213,6 +221,7 @@
       'click #assignee':function() {  this.toggleFields('assignee'); },
       'click #group':function() {  this.toggleFields('group'); },
       'click #custom':function() {  this.toggleFields('custom'); },
+      'click #user_custom':function() {  this.toggleFields('user-custom'); },
       'getTicketsFromView.done':'processTickets'
     },
 
@@ -355,7 +364,7 @@
         {id: 117, display: this.I18n.t('fields.brand.active'), name: 'active', type: 'boolean', belongs_to: 'brand', group_with: 'group'},
         {id: 118, display: this.I18n.t('fields.brand.default'), name: 'default', type: 'boolean', belongs_to: 'brand', group_with: 'group'},
         {id: 119, display: this.I18n.t('fields.brand.created_at'), name: 'created_at', type: 'date', belongs_to: 'brand', group_with: 'group'},
-        {id: 120, display: this.I18n.t('fields.brand.updated_at'), name: 'updated_at', type: 'date', belongs_to: 'brand', group_with: 'group'}
+        {id: 120, display: this.I18n.t('fields.brand.updated_at'), name: 'updated_at', type: 'date', belongs_to: 'brand', group_with: 'group'},
       ];
       this.fd = [
         {name: this.I18n.t('fd.semicolon'), value: ";"},
@@ -381,7 +390,8 @@
       this.when(
         this.ajaxAll('views', 'getViews'),
         this.ajaxAll('brands', 'getBrands'),
-        this.ajaxAll('fields', 'getFields')
+        this.ajaxAll('fields', 'getFields'),
+        this.ajaxAll('user_fields', 'getUserFields')
       ).then(this.switchToView.bind(this));
     },
 
@@ -399,6 +409,18 @@
                 this.fields.push({id: ticket_field.id, display: ticket_field.title, name: ticket_field.id, type: 'boolean', belongs_to: 'custom'});
               } else if (ticket_field.type === 'date') {
                 this.fields.push({id: ticket_field.id, display: ticket_field.title, name: ticket_field.id, type: 'date', belongs_to: 'custom'});
+              }
+            }.bind(this));
+          } if (name == 'user_fields') {
+            _.each(data.user_fields, function(user_field) {
+              if(user_field.type === 'text' || user_field.type === 'textarea' || user_field.type === 'regexp' || user_field.type === 'tagger') {
+                this.fields.push({id: user_field.id, key: user_field.key, display: user_field.title, name: user_field.id, type: 'text', belongs_to: 'user-custom'});
+              } else if (user_field.type === 'decimal' || user_field.type === 'integer') {
+                this.fields.push({id: user_field.id, key: user_field.key, display: user_field.title, name: user_field.id, type: 'number', belongs_to: 'user-custom'});
+              } else if (user_field.type === 'checkbox') {
+                this.fields.push({id: user_field.id, key: user_field.key, display: user_field.title, name: user_field.id, type: 'boolean', belongs_to: 'user-custom'});
+              } else if (user_field.type === 'date') {
+                this.fields.push({id: user_field.id, key: user_field.key, display: user_field.title, name: user_field.id, type: 'date', belongs_to: 'user-custom'});
               }
             }.bind(this));
           } else {
@@ -492,6 +514,7 @@
           var field = _.findWhere(this.fields, {id: id});
           var value = '';
           var result = '';
+          var user = {};
 
           if (field.belongs_to === 'group') {
             value = ((result = _.findWhere(data.groups, {id: ticket.group_id})) && result[field.name]);
@@ -515,6 +538,9 @@
             }
           } else if (field.belongs_to === 'custom') {
             value = ((result = _.findWhere(ticket.custom_fields, {id: Number(field.name)})) && result['value']);
+          } else if (field.belongs_to === 'user-custom') {
+            user = _.findWhere(data.users, {id: ticket.requester_id});
+            value = result = user.user_fields[field.key];
           } else {
             if (field.name.indexOf('.') > -1) {
               value = this.byString(ticket, field.name);
@@ -571,7 +597,7 @@
       }
 
       this.switchTo('fields', {
-        fields: this.fields.map(function(field) {
+        fields: this.fields.compact().map(function(field) {
           return {
             id: field.id,
             name: field.display,
