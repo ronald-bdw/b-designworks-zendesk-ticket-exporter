@@ -198,15 +198,35 @@
           type:        'GET',
           cache:       false
         };
-      }
+      },
 
+      getOrganizations: function(id) {
+        return {
+          url:         '/api/v2/organizations.json',
+          type:        'GET',
+          cache:       false
+        };
+      },
+
+      exportSteps: function(params) {
+        return {
+          url: this.setting("host") + "/zendesk/users_steps_exports",
+          type: "POST",
+          dataType: "json",
+          secure: true,
+          headers: { "X-Auth-Token": "{{ setting.pear_up_api_token }}" },
+          data: params.data
+        };
+      }
     },
 
     events: {
       'app.created':'load',
       'zd_ui_change .view_id': 'viewChange',
+      'zd_ui_change .organization_id': 'organizationChange',
       'getViewCount.done':'showViewCount',
       'click #view_continue':'switchToFields',
+      'click #steps_continue':'startExportSteps',
       'click #fields_back':function() {  this.switchToView(false); },
       'click #fields_continue':'switchToSettings',
       'click #settings_back':'switchToFields',
@@ -232,6 +252,15 @@
       this.estimate = 0;
       this.views = [];
       this.brands = [];
+      this.organizations = [];
+      this.years = [
+        { year: "2015" },
+        { year: "2016" },
+        { year: "2017" },
+        { year: "2018" },
+        { year: "2019" },
+        { year: "2020" }
+      ];
       this.fields = [
         {id: 0, display: this.I18n.t('fields.id'), name: 'id', type: 'number'},
         {id: 1, display: this.I18n.t('fields.external_id'), name: 'external_id', type: 'text'},
@@ -391,7 +420,8 @@
         this.ajaxAll('views', 'getViews'),
         this.ajaxAll('brands', 'getBrands'),
         this.ajaxAll('fields', 'getFields'),
-        this.ajaxAll('user_fields', 'getUserFields')
+        this.ajaxAll('user_fields', 'getUserFields'),
+        this.fetchOrganizations()
       ).then(this.switchToView.bind(this));
     },
 
@@ -435,6 +465,21 @@
       }.bind(this));
     },
 
+    fetchOrganizations: function() {
+      return this.promise(function(resolve, reject) {
+        this.ajax("getOrganizations").done(function requestDone(data) {
+          _.each(data.organizations, function(organization) {
+            this.organizations.push({id: organization.id, display: organization.name, name: organization.name, type: 'text', belongs_to: 'organization'});
+          }.bind(this));
+          if (data.next_page) {
+            this.ajax(request, data.next_page).done(requestDone).fail(reject);
+          } else {
+            resolve(this[name]);
+          }
+        }).fail(reject);
+      }.bind(this));
+    },
+
     viewChange: function() {
       this.$('#view_continue').prop('disabled', true);
       if(typeof this.$('.view_id').zdComboSelectMenu('value') === 'object') {
@@ -444,6 +489,39 @@
         this.ajax('getViewCount', this.$('.view_id').zdComboSelectMenu('value'));
       } else {
         this.$('#message').text('');
+      }
+    },
+
+    organizationChange: function() {
+      this.$('#steps_continue').prop('disabled', true);
+      if(typeof this.$('.organization_id').zdComboSelectMenu('value') === 'string') {
+        this.$('#steps_continue').prop('disabled', false);
+      }
+    },
+
+    startExportSteps: function() {
+      if(!isNaN(this.$('.organization_id').zdComboSelectMenu('value'))) {
+        services.notify("Start process of exporting steps", "notice");
+
+        organization_id = Number(this.$('.organization_id').zdComboSelectMenu('value'));
+        year = Number(this.$('.years').zdComboSelectMenu('value'));
+        var params = {
+          data: {
+            organization_id: organization_id,
+            year: year
+          }
+        };
+
+        this.ajax("exportSteps", params).done(function(data) {
+          services.notify("Process of exporting steps was successfully completed", "notice");
+
+          var download = document.createElement('a');
+          download.href = data.file;
+          download.click();
+          this.switchTo('view');
+        }).fail(function(){
+          services.notify("Something went wrong!", "error");
+        });
       }
     },
 
@@ -577,13 +655,23 @@
           return {
             id: view.id,
             selected: view.id === this.store('view') ? 'selected' : '',
-            title: view.title
+            title: view.title,
           };
-        }, this)
+        }, this),
+        organizations: this.organizations.map(function(organization) {
+          return {
+            id: organization.id,
+            title: organization.name
+          };
+        }, this),
+        years: this.years,
       });
       this.$('[data-zd-type="combo_select_menu"]').zdComboSelectMenu();
       if(this.store('view')) {
         this.viewChange();
+      }
+      if(this.store('organization')) {
+        this.organizationChange();
       }
     },
 
