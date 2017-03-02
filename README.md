@@ -1,14 +1,31 @@
-# App name
+# B-Designworks zendesk app
 
-[brief description of the app]
+## Quick start
 
-### The following information is displayed:
+Install Zendesk apps tools:
 
-* info1
-* info2
-* info3
+```bash
+gem install zendesk_apps_tools
+```
 
-Please submit bug reports to [Insert Link](). Pull requests are welcome.
+Clone application:
 
-### Screenshot(s):
-[put your screenshots down here.]
+```bash
+git clone git@github.com:fs/b-designworks-zendesk-ticket-exporter.git
+```
+
+Start ZAT server:
+
+```bash
+zat server
+```
+
+Open zendesk with `?zat=true` parameter. URL should look like this:
+
+```
+https://subdomain.zendesk.com/agent/tickets/321?zat=true
+```
+
+Click the **Reload Apps** icon in the upper-right side of the Apps panel to load your local app into the panel.
+
+More info on [Zendesk](https://support.zendesk.com/hc/en-us/articles/203691236)
