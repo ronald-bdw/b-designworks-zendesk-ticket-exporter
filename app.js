@@ -501,7 +501,7 @@
 
     startExportSteps: function() {
       if(!isNaN(this.$('.organization_id').zdComboSelectMenu('value'))) {
-        services.notify("Start process of exporting steps", "notice");
+        services.notify("Starting process of exporting steps", "notice");
 
         var params = {
           data: {
