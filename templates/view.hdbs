@@ -12,3 +12,28 @@
   <div id="message"></div>
   <button type="button" class="btn btn-primary" id="view_continue" disabled>{{t "view_continue_button"}}</button>
 </div>
+
+<div class="spacer"></div>
+
+<div class="wrapper">
+  <h1>{{t "user_steps_title"}}</h1>
+  <label>{{t "orgnaization_select" }}</label>
+
+  <select class="organization_id" data-zd-type="combo_select_menu">
+    <option value=""></option>
+    {{#each organizations}}
+      <option value="{{id}}">{{title}}</option>
+    {{/each}}
+  </select>
+
+  <label>{{t "year_select" }}</label>
+  <select class="years" data-zd-type="combo_select_menu">
+    <option value=""></option>
+    {{#each years}}
+      <option value="{{year}}">{{year}}</option>
+    {{/each}}
+  </select>
+
+  <div id="message"></div>
+  <button type="button" class="btn btn-primary" id="steps_continue" disabled>{{t "steps_continue_button"}}</button>
+</div>
