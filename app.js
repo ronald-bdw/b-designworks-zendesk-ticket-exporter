@@ -472,7 +472,7 @@
             this.organizations.push({id: organization.id, display: organization.name, name: organization.name, type: 'text', belongs_to: 'organization'});
           }.bind(this));
           if (data.next_page) {
-            this.ajax(request, data.next_page).done(requestDone).fail(reject);
+            this.ajax("getOrganizations", data.next_page).done(requestDone).fail(reject);
           } else {
             resolve(this[name]);
           }
@@ -503,12 +503,10 @@
       if(!isNaN(this.$('.organization_id').zdComboSelectMenu('value'))) {
         services.notify("Start process of exporting steps", "notice");
 
-        organization_id = Number(this.$('.organization_id').zdComboSelectMenu('value'));
-        year = Number(this.$('.years').zdComboSelectMenu('value'));
         var params = {
           data: {
-            organization_id: organization_id,
-            year: year
+            organization_id: Number(this.$('.organization_id').zdComboSelectMenu('value')),
+            year: Number(this.$('.years').zdComboSelectMenu('value'))
           }
         };
 
