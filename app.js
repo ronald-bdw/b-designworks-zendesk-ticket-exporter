@@ -516,7 +516,7 @@
           var download = document.createElement('a');
           download.href = data.file;
           download.click();
-          this.switchTo('view');
+          this.switchToView(false);
         }).fail(function(){
           services.notify("Something went wrong!", "error");
         });
